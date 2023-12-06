@@ -22,5 +22,5 @@ try {
   echo "Connection failed: " . $e->getMessage();
 }
 ?>
-´´´php
+´´´
 Curd Articulos
