@@ -22,3 +22,26 @@ try {
   echo "Connection failed: " . $e->getMessage();
 }
 ?>
+```
+
+**Header**
+
+Este fragmento de código se encarga de establecer el formato basico de un HTML5, donde tiene solo el inicio del html, el head, la hoja de vuelo del bootstrap en nuestro caso y el titulo.
+
+**Código del header:**
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="Bootstrap/icons/bootstrap-icons.min.css">
+  <title>Sistema web</title>
+</head>
+<body>
+  <div class="container">
+```
+
+
+
