@@ -113,7 +113,7 @@ Este fragmento de código se encarga de cerrar el formato basico del HTML5, dond
 
 **Index:**
 
-Este fragmento de código es la base de nuestro CRUD, donde aqui se mostraran todos los registros actuales de artículos en una tabla, los cuales desde aqui estara la opcion de editar y eliminar, además de agregar nuevos artículos.
+Este fragmento de código constituye la columna vertebral de nuestro sistema CRUD (CREATE, READ, UPDATE, DELETE). Aquí, se presentan de manera organizada todos los registros actuales de artículos en una tabla. Desde esta interfaz, los usuarios tienen la opción de editar y eliminar registros existentes, así como de agregar nuevos artículos a la base de datos.
 
 **Código del index:**
 ```php
@@ -199,7 +199,7 @@ include "footer.php";
 
 **Create:**
 
-Este fragmento de código maneja la inserción de nuevos artículos en la base de datos cuando se envía el formulario desde el modal. Además, proporciona una interfaz gráfica para que los usuarios introduzcan los detalles del nuevo artículo.
+Este fragmento de código gestiona la inserción de nuevos artículos en la base de datos cuando se envía el formulario desde el modal correspondiente. Además de facilitar la inserción, proporciona una interfaz visualmente atractiva que permite a los usuarios ingresar los detalles del nuevo artículo de manera intuitiva y eficiente.
 
 **Código del create:**
 ```php
@@ -277,7 +277,7 @@ if ($_POST) {
 
 **Update:**
 
-Este fragmento de código maneja la actualización de detalles de un artículo en la base de datos y proporciona una interfaz gráfica para que los usuarios realicen esta operación.
+Este fragmento de código se encarga de gestionar la actualización de los detalles de un artículo en la base de datos. Además, ofrece a los usuarios una interfaz gráfica intuitiva que les permite realizar esta operación de manera sencilla y eficiente.
 
 **Código del update:**
 ```php
@@ -386,7 +386,7 @@ include "footer.php";
 
 **Delete:**
 
-Este fragmento de código elimina un artículo de la base de datos según el id proporcionado en la URL y redirige al usuario de vuelta al index muestra la lista de artículos. 
+Este fragmento de código está diseñado para eliminar un artículo específico de la base de datos, utilizando la identificación proporcionada en la URL. Después de completar la eliminación, redirige al usuario de manera fluida de vuelta al índice, donde se muestra la lista actualizada de artículos. Este proceso garantiza una gestión eficiente y coherente de los registros en la base de datos.
 
 **Código del delete:**
 ```php
