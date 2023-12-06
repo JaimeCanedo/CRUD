@@ -9,9 +9,9 @@ Este fragmento de código se encarga de establecer la conexión entre nuestra ba
 **Código de la conexión:**
 ```php
 <?php
-$servername = "192.168.11.137";
-$username = "rootPrueba";
-$password = "123";
+$servername = "192.168.11.138";
+$username = "rootIP";
+$password = "1234";
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=crudp", $username, $password);
@@ -54,7 +54,6 @@ Este fragmento de código se encarga de cerrar el formato basico del HTML5, dond
   </body>
 </html>
 ```
-
 
 
 
