@@ -24,9 +24,9 @@ try {
 ?>
 ```
 
-**Header**
+**Header:**
 
-Este fragmento de código se encarga de establecer el formato basico de un HTML5, donde tiene solo el inicio del html, el head, la hoja de vuelo del bootstrap en nuestro caso y el titulo.
+Este fragmento de código se encarga de establecer el formato basico de un HTML5, donde tiene solo el inicio del HTML, el inicio del HEAD, el TITLE de la pagina, las hojas de vuelo utilizadas, en nuestro caso se uso una hoja de vuelo CSS y una de ICONS, ambas de Bootstrap.
 
 **Código del header:**
 ```php
@@ -42,6 +42,20 @@ Este fragmento de código se encarga de establecer el formato basico de un HTML5
 <body>
   <div class="container">
 ```
+
+**Footer:**
+
+Este fragmento de código se encarga de cerrar el formato basico del HTML5, donde solo se tiene el cierre del DIV, el JavaScript utilizado, en nuestro caso el de bootstrap.min.js, el cierre del BODY y por ultimo el cierre del HTML.
+
+**Código del header:**
+```php
+</div> <!--Cierra la clase container-->
+    <script src="Bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+```
+
+
 
 
 
