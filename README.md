@@ -7,7 +7,7 @@
 Este fragmento de codigo que encarga de establecer la coneccion entre nuestra base de datos en phpmyadmin con nuetra pagina desarrollada en PHP, esto se realiza mediante estableciendo la ip del servidor, el usuario y contraseña requeridos en funcion de que operaciones se requeiran realizar en la base de datos seleccioanda.
 
 (Codigo de la conexion)
-´´´
+´´´php
 <?php
 $servername = "192.168.11.137";
 $username = "rootPrueba";
@@ -22,5 +22,5 @@ try {
   echo "Connection failed: " . $e->getMessage();
 }
 ?>
-´´´
+´´´php
 Curd Articulos
