@@ -384,5 +384,23 @@ include "footer.php";
 ?>
 ```
 
+**Delete:**
+
+Este fragmento de código elimina un artículo de la base de datos según el id proporcionado en la URL y redirige al usuario de vuelta al index muestra la lista de artículos. 
+
+**Código del delete:**
+```php
+<?php
+include "connection.php";
+if (isset($_GET['id'])) {
+    $id=(isset($_GET['id']) ? $_GET['id'] : "");
+    $stmt = $conn->prepare("DELETE FROM articulos WHERE id=:id");
+    $stmt->bindParam(":id",$id);
+    $stmt->execute();
+    header('location: index_articulos.php');
+}
+?>
+```
+
 
 
