@@ -55,6 +55,244 @@ Este fragmento de código se encarga de cerrar el formato basico del HTML5, dond
 </html>
 ```
 
+**Create:**
+
+Esta seccion del gestiona la inserción de nuevos clientes en una base de datos, obteniendo la información del formulario HTML mediante el método POST. Luego, redirige a la página principal. El código HTML utiliza Bootstrap para crear un modal con un formulario que recopila nombre, email, teléfono y dirección del nuevo cliente. Este código facilita la interacción del usuario y la manipulación de la base de datos para la creación de clientes.
+
+**Codigo del Create:**
+
+```php
+<?php
+include "connection.php";
+if ($_POST) {
+    $nombre = (isset($_POST['nombre']) ? $_POST['nombre'] : "");
+    $email = (isset($_POST['email']) ? $_POST['email'] : "");
+    $telefono = (isset($_POST['telefono']) ? $_POST['telefono'] : "");
+    $direccion = (isset($_POST['direccion']) ? $_POST['direccion'] : "");
+
+    $stmt = $conn->prepare("INSERT INTO clientes (nombre,email,telefono,direccion) VALUES (:nombre,:email,:telefono,:direccion)");
+    $stmt->bindValue(":nombre",$nombre);
+    $stmt->bindValue(":email",$email);
+    $stmt->bindValue(":telefono",$telefono);
+    $stmt->bindValue(":direccion",$direccion);
+    $stmt->execute();
+    header("location:index.php");
+}
+
+?>
+
+<!-- Modal para crear cliente -->
+<div class="modal" id="create" tabindex="-1" aria-labelledby="modallabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo cliente</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="inputnombre" placeholder="Ingresa tu nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="inputemail" placeholder="name@example.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Telefono</label>
+                        <input type="tel" class="form-control" name="telefono" id="inputtelefono" placeholder="123-456-7890" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" name="direccion" id="inputdireccion" placeholder="Ingresa tu dirección" required>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+```
+
+**Delete**
+
+Esta seccion de codigo se encarga de eliminar clientes de la base de datos. Verifica si se ha proporcionado un parámetro 'id' a través de la URL. Si existe, se utiliza para preparar y ejecutar una consulta SQL que elimina el cliente correspondiente. Después de la eliminación, redirige a la página principal. La funcionalidad de eliminacion depende enteramente de este bloque de codigo.
+
+**Codigo de Delete**
+
+```php
+<?php
+include "connection.php";
+if (isset($_GET['id'])) {
+    $id=(isset($_GET['id']) ? $_GET['id'] : "");
+    $stmt = $conn->prepare("DELETE FROM clientes WHERE id=:id");
+    $stmt->bindParam(":id",$id);
+    $stmt->execute();
+    header('location: index.php');
+}
+?>
+```
+
+**Index**
+Este segmento de codigo una interfaz para gestionar clientes almacenados en la base de datos. Permite acceder a las opciones de ver, crear, actualizar y eliminar registros. Utiliza una tabla para mostrar la información de los clientes, con botones para la interacción del usuario. Se incluyen scripts y archivos adicionales para la creación de nuevos clientes y la gestión del diseño. El código constituye el entorno de gestión de clientes con funcionalidades esenciales de CRUD.
+**Codigo del Index**
+
+```php
+<?php
+include "header.php";
+include "connection.php";
+
+$stmt = $conn->prepare("SELECT * FROM clientes");
+$stmt->execute();
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+<!-- Contenido -->
+<div class="row">
+  <div class="col-md-10">
+    <h1>Clientes</h1>
+  </div>
+  <div class="col-md-2">
+    <h1>
+      <button class="btn btn-primary data" data-bs-toggle="modal" data-bs-target="#create">
+      <i class="bi bi-person-fill-add"></i> Nuevo
+      </button>
+    </h1>
+  </div>
+</div>
+<table class="table table-bordered table-striped">
+<thead>
+  <tr>
+    <th width="20">ID</th>
+    <th>Nombre</th>
+    <th>Email</th>
+    <th>Telefono</th>
+    <th>Dirección</th>
+    <th width="100">Acciones</th>
+  </tr>
+</thead>
+<tbody>
+  <?php     
+  foreach ($results as $result){
+  ?>
+  <tr>
+    <td><?php echo $result['id']; ?></td>
+    <td><?php echo $result['nombre']; ?></td>
+    <td><?php echo $result['email']; ?></td>
+    <td><?php echo $result['telefono']; ?></td>
+    <td><?php echo $result['direccion']; ?></td>
+    <td>
+      <a href="update.php?id=<?php echo $result['id']; ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i></a>
+      <a onclick="return confirm_delete()" href="delete.php?id=<?php echo $result['id']; ?>" class="btn btn-danger btn-sm">
+      <i class="bi bi-trash-fill"></i></a>
+  
+  </tr>
+  <?php } ?>
+</tbody>
+</table>
+<script type="text/javascript">
+ function confirm_delete(){
+  return confirm('¿Estas seguro de eliminarlo?');
+ }
+</script>
+<?php
+include "create.php";
+include "footer.php";
+?>
+```
+
+**Update**
+El bloque de codigo permite actualizar la información de clientes en la base de datos. Al recibir un ID, prellena el formulario con los detalles existentes del cliente. Después de enviar el formulario se actualiza la base de datos y mostrando un mensaje de éxito o error. Facilita gestionar los procesos de actualizacion de informacion directamente desde la pagina web.
+**Codigo de Update**
+
+```php
+<?php
+    include "connection.php";
+    
+    if (isset($_GET['id'])) {
+        $id=(isset($_GET['id'])?$_GET['id']:'');
+        $stmt = $conn->prepare("SELECT * FROM clientes WHERE id=:id");
+        $stmt->bindValue(":id",$id);
+        $stmt->execute();
+        $result=$stmt->fetch(PDO::FETCH_LAZY);
+        $nombre = $result['nombre'];
+        $email = $result['email'];
+        $telefono = $result['telefono'];
+        $direccion = $result['direccion'];
+    }
+
+    if ($_POST) {
+        $id=(isset($_POST['id']) ? $_POST['id']:'');
+        $nombre=(isset($_POST['nombre']) ? $_POST['nombre']:'');
+        $email=(isset($_POST['email']) ? $_POST['email']:'');
+        $telefono=(isset($_POST['telefono']) ? $_POST['telefono']:'');
+        $direccion=(isset($_POST['direccion']) ? $_POST['direccion']:'');
+
+        $stmt = $conn->prepare("UPDATE `clientes` SET `id`=:id, `nombre`=:nombre, `email`=:email, `direccion`=:direccion, 
+        `telefono`=:telefono  WHERE `clientes`.`id`=:id");
+        $stmt->bindValue(":id",$id);
+        $stmt->bindValue(":nombre",$nombre);
+        $stmt->bindValue(":email",$email);
+        $stmt->bindValue(":telefono",$telefono);
+        $stmt->bindValue(":direccion",$direccion);
+        $stmt->execute();
+        if ($stmt) {
+   ?>         
+            <div class="alert alert-succes alert-dismissible fade show" role="altert">
+            <strong>Correcto!</strong> Se actualizo el cliente.
+            
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+            header('location: index.php');
+        } else {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> No se pudo actualizar el cliente.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    <?php
+       
+    }
+}
+include "header.php";
+?>
+<!-- Formulario de actualizar cliente -->
+<div class="row">
+    <div class="col-md-10">
+        <h2>Actualizar Cliente</h2>
+    </div>
+    <form action="" method="post">
+                    <input type="hidden" id="id" name="id" value="<?php echo $id; ?>">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="inputnombre" placeholder="Ingresa tu nombre" required value="<?php echo $nombre?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="inputemail" placeholder="name@example.com" required value="<?php echo $email?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Telefono</label>
+                        <input type="tel" class="form-control" name="telefono" id="inputtelefono" placeholder="123-456-7890" required value="<?php echo $telefono?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" name="direccion" id="inputdireccion" placeholder="Ingresa tu dirección" required value="<?php echo $direccion?>">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Modificar</button>
+                    </form>
+        </div>
+<?php
+    include "footer.php";
+?>
+```
+
 > [!NOTE]
 > Crud Articulos
 
