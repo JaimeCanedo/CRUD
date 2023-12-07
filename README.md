@@ -2,7 +2,7 @@
 > [!NOTE]
 > Crud Clientes
 
-**Connection**
+**Connection:**
 
 Este fragmento de código se encarga de establecer la conexión entre nuestra base de datos en phpMyAdmin y nuestra página desarrollada en PHP. Esto se realiza estableciendo la IP del servidor, el nombre de usuario y la contraseña requeridos en función de las operaciones que se requieran realizar en la base de datos seleccionada.
 
@@ -119,7 +119,7 @@ if ($_POST) {
 </div>
 ```
 
-**Delete**
+**Delete:**
 
 Esta seccion de codigo se encarga de eliminar clientes de la base de datos. Verifica si se ha proporcionado un parámetro 'id' a través de la URL. Si existe, se utiliza para preparar y ejecutar una consulta SQL que elimina el cliente correspondiente. Después de la eliminación, redirige a la página principal. La funcionalidad de eliminacion depende enteramente de este bloque de codigo.
 
@@ -138,7 +138,7 @@ if (isset($_GET['id'])) {
 ?>
 ```
 
-**Index**
+**Index:**
 Este segmento de codigo una interfaz para gestionar clientes almacenados en la base de datos. Permite acceder a las opciones de ver, crear, actualizar y eliminar registros. Utiliza una tabla para mostrar la información de los clientes, con botones para la interacción del usuario. Se incluyen scripts y archivos adicionales para la creación de nuevos clientes y la gestión del diseño. El código constituye el entorno de gestión de clientes con funcionalidades esenciales de CRUD.
 **Codigo del Index**
 
@@ -206,7 +206,8 @@ include "footer.php";
 ?>
 ```
 
-**Update**
+**Update:**
+
 El bloque de codigo permite actualizar la información de clientes en la base de datos. Al recibir un ID, prellena el formulario con los detalles existentes del cliente. Después de enviar el formulario se actualiza la base de datos y mostrando un mensaje de éxito o error. Facilita gestionar los procesos de actualizacion de informacion directamente desde la pagina web.
 **Codigo de Update**
 
@@ -296,7 +297,7 @@ include "header.php";
 > [!NOTE]
 > Crud Articulos
 
-**Connection**
+**Connection:**
 
 Este fragmento de código se encarga de establecer la conexión entre nuestra base de datos en phpMyAdmin y nuestra página desarrollada en PHP. Esto se realiza estableciendo la IP del servidor, el nombre de usuario y la contraseña requeridos en función de las operaciones que se requieran realizar en la base de datos seleccionada.
 
